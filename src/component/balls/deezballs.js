@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import './../App.css'
+import './balls.css'
 
-const LotteryItem = (props) => {
-    const [number, setNumber] = useState('?');
+const LotteryItem = ({ number, decrypting, index, color }) => {
+    const [currentNumber, setCurrentNumber] = useState('?');
     const [decryptingDone, setDecryptingDone] = useState('');
 
     const randomNumber = () => {
-        setNumber(Math.round(Math.random() * 9));
+        setCurrentNumber(Math.round(Math.random() * 9));
     };
 
     useEffect(() => {
         let timer;
-        if (props.decrypting) {
+        if (decrypting) {
             setDecryptingDone('');
             timer = setInterval(randomNumber, 10);
 
             const timeout = setTimeout(() => {
-                setNumber(props.number);
+                setCurrentNumber(number);
                 setDecryptingDone('done');
                 clearInterval(timer);
-            }, 1000 * props.index + 1000);
+            }, 1000 * index + 1000);
 
             return () => {
                 clearTimeout(timeout);
@@ -27,12 +27,11 @@ const LotteryItem = (props) => {
             };
         }
         console.log(number)
-
-    }, [props.decrypting, props.number, props.index]);
+    }, [decrypting, number, index]);
 
     return (
-        <div className={`ball ${props.color} ${decryptingDone}`}>
-            {number}
+        <div className={`ball ${color} ${decryptingDone}`}>
+            {currentNumber}
         </div>
     );
 };

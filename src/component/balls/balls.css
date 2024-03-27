@@ -1,0 +1,33 @@
+.ball {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+    line-height: 80px;
+    font-size: 48px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.ball:last-child {
+    margin-bottom: 0;
+}
+
+.ball.blue {
+    background: #69c8f2;
+}
+
+.ball.red {
+    background: #ff7272;
+}
+
+.ball.gray {
+    background: #aaa;
+}
+
+.ball.green {
+    background: #b0d840;
+}
+
+.ball.done {
+    animation: done 0.3s linear;
+}

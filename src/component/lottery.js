@@ -5,7 +5,7 @@ import Loading from './loading';
 import fetchWithTimeout from '../config/config';
 import LogoComponent from '../assets/logo';
 import { Heading, Button, Box, Text, VStack, HStack } from 'native-base';
-import LotteryItem from './deezballs';
+import LotteryItem from './balls/deezballs';
 
 function Lottery() {
   const [data, setData] = useState([]);
@@ -94,6 +94,9 @@ function Lottery() {
           <img src={require('../assets/Logo-tron.png')} alt="Logo" className='logo_img' />
         </header>
         <Box alignItems={'center'}>
+          <Heading bold
+          // color={'#15489f'}
+          >MINI GAME</Heading>
           <Box width={'50%'} rounded="lg" overflow="hidden"
             borderColor="#c4c4c4" borderWidth="1"
             _dark={{
@@ -108,12 +111,15 @@ function Lottery() {
               backgroundColor: "#dadada"
             }}
             alignItems={'center'}
+            margin={'1rem'}
           >
             <Box
               width={'50%'} rounded="lg" overflow="hidden" textAlign={'center'}
-            // backgroundColor={'black'}
+              // backgroundColor={'black'}
+              alignItems={'center'}
+              margin={'1rem'}
             >
-              <HStack id="numbers">
+              <HStack id="numbers" margin={'1rem'} backgroundColor={'black'} padding={'1'}>
                 <LotteryItem
                   index="0"
                   color="blue"
@@ -122,29 +128,29 @@ function Lottery() {
                 />
                 <LotteryItem
                   index="1"
-                  color="blue"
+                  color="red"
                   number={MaTrungThuong[1]}
                   decrypting={effect}
                 />
                 <LotteryItem
                   index="2"
-                  color="blue"
+                  color="gray"
                   number={MaTrungThuong[2]}
                   decrypting={effect}
                 />
                 <LotteryItem
                   index="3"
-                  color="red"
+                  color="green"
                   number={MaTrungThuong[3]}
                   decrypting={effect}
                 />
               </HStack>
             </Box>
             <button id='btn'
+              className={effect ? "hide" : ""}
               onClick={handleRandomize}>Nhận số</button>
           </Box>
         </Box>
-
         <footer className="footer">
           {/* Add footer content here */}
         </footer>

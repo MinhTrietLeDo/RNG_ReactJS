@@ -74,46 +74,6 @@ h1 {
   color: var(--color-blue);
 }
 
-.rngContainer {
-  background-color: #dadada;
-  width: 80%;
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-}
-
-#numbers {
-  display: flex;
-  margin-bottom: 20px;
-  padding: 30px;
-  border: 3px solid pink;
-  border-radius: 20px;
-  align-items: center;
-  flex-direction: column;
-}
-
-#numbers .ball {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 10px;
-  line-height: 80px;
-  font-size: 48px;
-  border-radius: 50%;
-  text-align: center;
-}
-
-#numbers .ball:last-child {
-  margin-bottom: 0;
-}
-
-#numbers .ball.blue {
-  background: #69c8f2;
-}
-
-#numbers .ball.red {
-  background: #ff7272;
-}
-
 #btn {
   background-color: #DE1E3B;
   width: 10rem;
