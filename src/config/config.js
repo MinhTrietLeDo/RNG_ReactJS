@@ -16,3 +16,5 @@ const fetchWithTimeout = async (url, options = {}, timeout = 5000) => {
         throw error;
     }
 };
+
+export default fetchWithTimeout
