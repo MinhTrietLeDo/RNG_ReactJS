@@ -3,14 +3,16 @@
   --color-blue: #15489f;
 }
 
+.App {
+  align-items: center;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   width: 80vw;
-  /* 80% of the viewport's width */
   height: 50vh;
-  /* 50% of the viewport's height */
 }
 
 .header {
@@ -21,10 +23,15 @@
 
 .main-content {
   text-align: center;
+  align-content: center;
 }
 
 .content-area {
-  margin: 20px 0;
+  margin: 1rem 0;
+  display: block;
+  justify-self: center;
+  width: 100%;
+  height: 5rem;
 }
 
 .logo_img {
@@ -65,4 +72,62 @@
 h1 {
   font-size: 2vw;
   color: var(--color-blue);
+}
+
+.rngContainer {
+  background-color: #dadada;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+#numbers {
+  display: flex;
+  margin-bottom: 20px;
+  padding: 30px;
+  border: 3px solid pink;
+  border-radius: 20px;
+  align-items: center;
+  flex-direction: column;
+}
+
+#numbers .ball {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+  line-height: 80px;
+  font-size: 48px;
+  border-radius: 50%;
+  text-align: center;
+}
+
+#numbers .ball:last-child {
+  margin-bottom: 0;
+}
+
+#numbers .ball.blue {
+  background: #69c8f2;
+}
+
+#numbers .ball.red {
+  background: #ff7272;
+}
+
+#btn {
+  background-color: #DE1E3B;
+  width: 10rem;
+  height: 3rem;
+  color: #fff;
+  font-size: 2rem;
+  border-radius: 30px;
+  border: none;
+  transform-origin: 50% 50% 0px;
+}
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }

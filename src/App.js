@@ -1,10 +1,12 @@
 import * as React from 'react';
 import Lottery from './component/lottery';
-
+import {NativeBaseProvider, } from 'native-base';
 function App() {
 
   return (
-    <Lottery />
+    <NativeBaseProvider>
+      <Lottery />
+    </NativeBaseProvider>
   );
 }
 

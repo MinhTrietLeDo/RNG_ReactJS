@@ -1,0 +1,16 @@
+.image-grid {
+    position: relative; /* Establishes a containing block for absolutely positioned children */
+    width: max-content; /* Fits the width to its contents */
+    height: 200px; /* Adjust height based on your needs */
+  }
+  
+  .image-wrapper {
+    position: absolute; /* Position the images absolutely within their relative parent */
+  }
+  
+  .image-wrapper img {
+    display: block; /* Remove default inline image whitespace */
+    width: 100px; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
