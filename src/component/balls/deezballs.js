@@ -25,7 +25,6 @@ const LotteryItem = ({ number, decrypting, index, color }) => {
             return () => {
                 clearTimeout(timeout);
                 clearInterval(timer);
-                setDecryptingDone("done")
             };
         }
         console.log(number)

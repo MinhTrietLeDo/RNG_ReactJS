@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import Loading from "./loading";
 import fetchWithTimeout from "../config/config";
 import LogoComponent from "../assets/logo";
-import { Heading, Button, Box, Text, VStack, HStack } from "native-base";
+import { Heading, Button, Box, Text, VStack, HStack, Center } from "native-base";
 import LotteryItem from "./balls/deezballs";
 
 function Lottery() {
@@ -106,7 +106,7 @@ function Lottery() {
         <Box alignItems={"center"}>
           <Heading
             bold
-            // color={'#15489f'}
+          // color={'#15489f'}
           >
             MINI GAME
           </Heading>
@@ -121,7 +121,7 @@ function Lottery() {
               backgroundColor: "#dadada",
             }}
             _web={{
-              shadow: 2,
+              shadow: 3,
               borderWidth: 0,
             }}
             _light={{
@@ -131,11 +131,10 @@ function Lottery() {
             margin={"1rem"}
           >
             <Box
-              maxWidth={"50%"}
+              maxWidth={"70%"}
               rounded="lg"
               overflow="hidden"
               textAlign={"center"}
-              // backgroundColor={'black'}
               alignItems={"center"}
               margin={"1rem"}
             >
@@ -143,33 +142,46 @@ function Lottery() {
                 id="numbers"
                 margin={"1rem"}
                 padding={"1"}
-                justifyContent={"space-evenly"}
-                width={'100%'}
+                justifyContent={"space-around"}
+                width={'25rem'}
+                backgroundColor={'#FBF8F9'}
+                height={'10rem'}
+                borderRadius={15}
+                maxWidth={"100%"}
+                shadow={3}
               >
-                <LotteryItem
-                  index="0"
-                  color="blue"
-                  number={MaTrungThuong[0]}
-                  decrypting={effect}
-                />
-                <LotteryItem
-                  index="1"
-                  color="red"
-                  number={MaTrungThuong[1]}
-                  decrypting={effect}
-                />
-                <LotteryItem
-                  index="2"
-                  color="gray"
-                  number={MaTrungThuong[2]}
-                  decrypting={effect}
-                />
-                <LotteryItem
-                  index="3"
-                  color="green"
-                  number={MaTrungThuong[3]}
-                  decrypting={effect}
-                />
+                <Center>
+                  <LotteryItem
+                    index="0"
+                    color="blue"
+                    number={MaTrungThuong[0]}
+                    decrypting={effect}
+                  />
+                </Center>
+                <Center>
+                  <LotteryItem
+                    index="1"
+                    color="red"
+                    number={MaTrungThuong[1]}
+                    decrypting={effect}
+                  />
+                </Center>
+                <Center>
+                  <LotteryItem
+                    index="2"
+                    color="gray"
+                    number={MaTrungThuong[2]}
+                    decrypting={effect}
+                  />
+                </Center>
+                <Center>
+                  <LotteryItem
+                    index="3"
+                    color="green"
+                    number={MaTrungThuong[3]}
+                    decrypting={effect}
+                  />
+                </Center>
               </HStack>
             </Box>
             <button
