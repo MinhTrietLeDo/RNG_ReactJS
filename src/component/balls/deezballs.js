@@ -3,27 +3,29 @@ import './balls.css'
 
 const LotteryItem = ({ number, decrypting, index, color }) => {
     const [currentNumber, setCurrentNumber] = useState('?');
-    const [decryptingDone, setDecryptingDone] = useState('');
+    const [decryptingDone, setDecryptingDone] = useState("");
 
     const randomNumber = () => {
         setCurrentNumber(Math.round(Math.random() * 9));
     };
 
     useEffect(() => {
+        // console.log("decrypting state:",decrypting,"\ndecryptingDone:", decryptingDone)
         let timer;
         if (decrypting) {
-            setDecryptingDone('');
+            setDecryptingDone("");
             timer = setInterval(randomNumber, 10);
 
             const timeout = setTimeout(() => {
                 setCurrentNumber(number);
-                setDecryptingDone('done');
+                setDecryptingDone("done");
                 clearInterval(timer);
             }, 1000 * index + 1000);
 
             return () => {
                 clearTimeout(timeout);
                 clearInterval(timer);
+                setDecryptingDone("done")
             };
         }
         console.log(number)

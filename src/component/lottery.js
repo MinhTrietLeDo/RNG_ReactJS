@@ -1,16 +1,16 @@
 // import logo from './logo.svg';
-import './../App.css';
-import React, { useState, useEffect, useCallback } from 'react';
-import Loading from './loading';
-import fetchWithTimeout from '../config/config';
-import LogoComponent from '../assets/logo';
-import { Heading, Button, Box, Text, VStack, HStack } from 'native-base';
-import LotteryItem from './balls/deezballs';
+import "./../App.css";
+import React, { useState, useEffect, useCallback } from "react";
+import Loading from "./loading";
+import fetchWithTimeout from "../config/config";
+import LogoComponent from "../assets/logo";
+import { Heading, Button, Box, Text, VStack, HStack } from "native-base";
+import LotteryItem from "./balls/deezballs";
 
 function Lottery() {
   const [data, setData] = useState([]);
   const [MaTrungThuong, setMaTrungThuong] = useState([0, 0, 0, 0]);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
   const [usedIndices, setUsedIndices] = useState(new Set());
   const [effect, setEffect] = useState(false);
 
@@ -20,20 +20,24 @@ function Lottery() {
 
   const fetchData = async () => {
     try {
-      const response = await fetchWithTimeout('http://localhost:3001', {}, 5000);
+      const response = await fetchWithTimeout(
+        "http://localhost:3001",
+        {},
+        5000
+      );
       const data = await response.json();
-      if (typeof data !== 'undefined') {
-        const splitData = data.map(item => item.MaTrungThuong.split(''));
+      if (typeof data !== "undefined") {
+        const splitData = data.map((item) => item.MaTrungThuong.split(""));
         setData(splitData);
         setLoading(false);
 
-        console.log(splitData)
+        console.log(splitData);
       } else {
-        alert('Cannot communicate with the server');
+        alert("Cannot communicate with the server");
       }
     } catch (error) {
-      console.error('Error fetching data:', error);
-      alert('Error fetching data')
+      console.error("Error fetching data:", error);
+      alert("Error fetching data");
     }
   };
 
@@ -45,7 +49,9 @@ function Lottery() {
 
       // Mark this index as used
       const actualIndex = data.indexOf(availableData[randomIndex]);
-      setUsedIndices(prevUsedIndices => new Set(prevUsedIndices).add(actualIndex));
+      setUsedIndices((prevUsedIndices) =>
+        new Set(prevUsedIndices).add(actualIndex)
+      );
 
       setEffect(true);
       const timeoutId = setTimeout(() => {
@@ -63,63 +69,83 @@ function Lottery() {
   if (loading) {
     return (
       <div
-        id='main-container'
+        id="main-container"
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          alignSelf: 'center'
-        }} >
-        <div id='loading-container'>
-          <Loading height={'20%'} width={'20%'} />
-          <div id='loading-text'>
-
-          </div>
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          alignSelf: "center",
+        }}
+      >
+        <div id="loading-container">
+          <Loading height={"20%"} width={"20%"} />
+          <div id="loading-text"></div>
         </div>
-
       </div>
-    )
+    );
   } else {
     return (
       <div className="App">
         <header className="header">
           {/* <LogoComponent/> */}
           <Box>
-            <Heading color={'#ed232b'} bold>
+            <Heading color={"#ed232b"} bold>
               TRƯỜNG ĐẠI HỌC TÔN ĐỨC THẮNG
             </Heading>
-            <Heading bold color={'#15489f'} >NGÀY HỘI TƯ VẤN TUYỂN SINH ĐẠI HỌC 2024</Heading>
+            <Heading bold color={"#15489f"}>
+              NGÀY HỘI TƯ VẤN TUYỂN SINH ĐẠI HỌC 2024
+            </Heading>
           </Box>
           <LogoComponent />
-          <img src={require('../assets/Logo-tron.png')} alt="Logo" className='logo_img' />
+          <img
+            src={require("../assets/Logo-tron.png")}
+            alt="Logo"
+            className="logo_img"
+          />
         </header>
-        <Box alignItems={'center'}>
-          <Heading bold
-          // color={'#15489f'}
-          >MINI GAME</Heading>
-          <Box width={'50%'} rounded="lg" overflow="hidden"
-            borderColor="#c4c4c4" borderWidth="1"
+        <Box alignItems={"center"}>
+          <Heading
+            bold
+            // color={'#15489f'}
+          >
+            MINI GAME
+          </Heading>
+          <Box
+            width={"50%"}
+            rounded="lg"
+            overflow="hidden"
+            borderColor="#c4c4c4"
+            borderWidth="1"
             _dark={{
               borderColor: "#c4c4c4",
-              backgroundColor: "#dadada"
+              backgroundColor: "#dadada",
             }}
             _web={{
               shadow: 2,
-              borderWidth: 0
+              borderWidth: 0,
             }}
             _light={{
-              backgroundColor: "#dadada"
+              backgroundColor: "#dadada",
             }}
-            alignItems={'center'}
-            margin={'1rem'}
+            alignItems={"center"}
+            margin={"1rem"}
           >
             <Box
-              width={'50%'} rounded="lg" overflow="hidden" textAlign={'center'}
+              maxWidth={"50%"}
+              rounded="lg"
+              overflow="hidden"
+              textAlign={"center"}
               // backgroundColor={'black'}
-              alignItems={'center'}
-              margin={'1rem'}
+              alignItems={"center"}
+              margin={"1rem"}
             >
-              <HStack id="numbers" margin={'1rem'} backgroundColor={'black'} padding={'1'}>
+              <HStack
+                id="numbers"
+                margin={"1rem"}
+                padding={"1"}
+                justifyContent={"space-evenly"}
+                width={'100%'}
+              >
                 <LotteryItem
                   index="0"
                   color="blue"
@@ -146,19 +172,19 @@ function Lottery() {
                 />
               </HStack>
             </Box>
-            <button id='btn'
+            <button
+              id="btn"
               className={effect ? "hide" : ""}
-              onClick={handleRandomize}>Nhận số</button>
+              onClick={handleRandomize}
+            >
+              Nhận số
+            </button>
           </Box>
         </Box>
-        <footer className="footer">
-          {/* Add footer content here */}
-        </footer>
+        <footer className="footer">{/* Add footer content here */}</footer>
       </div>
     );
   }
-
 }
 
 export default Lottery;
-

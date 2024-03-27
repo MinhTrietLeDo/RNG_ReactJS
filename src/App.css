@@ -83,6 +83,7 @@ h1 {
   border-radius: 30px;
   border: none;
   transform-origin: 50% 50% 0px;
+  margin: 1rem;
 }
 
 *,
