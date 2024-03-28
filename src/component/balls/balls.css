@@ -1,14 +1,15 @@
 .ball {
-    width: 10rem;
-    height: 10rem;
+    width: 12rem;
+    height: 12rem;
     margin-bottom: 10px;
     line-height: 80px;
-    font-size: 4rem;
+    font-size: 8rem;
     border-radius: 50%;
     text-align: center;
     justify-content: center;
     align-content: center;
     color: white;
+    font-weight: 700;
 }
 
 .ball:last-child {
