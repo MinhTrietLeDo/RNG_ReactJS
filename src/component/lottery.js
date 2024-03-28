@@ -3,7 +3,6 @@ import "./../App.css";
 import React, { useState, useEffect, useCallback } from "react";
 import Loading from "./loading";
 import fetchWithTimeout from "../config/config";
-import LogoComponent from "../assets/logo";
 import { Heading, Button, Box, Text, VStack, HStack, Center, Modal } from "native-base";
 import LotteryItem from "./balls/deezballs";
 
@@ -36,7 +35,7 @@ function Lottery() {
         alert("Cannot communicate with the server");
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      // console.error("Error fetching data:", error);
       alert("Error fetching data");
     }
   };
