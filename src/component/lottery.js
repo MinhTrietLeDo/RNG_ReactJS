@@ -28,11 +28,10 @@ function Lottery() {
       );
       const data = await response.json();
       if (typeof data !== "undefined") {
-        const splitData = data.map((item) => item.MaTrungThuong.split(""));
+        const updatedData = data.slice(1);
+        const splitData = updatedData.map((item) => item.MaTrungThuong.split(""));
         setData(splitData);
         setLoading(false);
-
-        console.log(splitData);
       } else {
         alert("Cannot communicate with the server");
       }
@@ -187,9 +186,9 @@ function Lottery() {
                 <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
                   <Modal.Content maxWidth="900px">
                     <Modal.CloseButton />
-                    <Modal.Header _text={{fontSize:'5rem'}}>Chúc Mừng Thí Sinh</Modal.Header>
+                    <Modal.Header _text={{ fontSize: '5rem' }}>Chúc Mừng Thí Sinh</Modal.Header>
                     <Modal.Body textAlign={'center'}>
-                        <Text bold fontSize={'15rem'}>{MaTrungThuong}</Text>
+                      <Text bold fontSize={'15rem'}>{MaTrungThuong}</Text>
                     </Modal.Body>
                     <Modal.Footer>
                       <Button variant="ghost" colorScheme="blueGray" onPress={() => {
