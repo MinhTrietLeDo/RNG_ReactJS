@@ -87,112 +87,120 @@ function Lottery() {
     return (
       <div className="App">
         <header className="header">
-          {/* <LogoComponent/> */}
-          <Box>
-            <Heading color={"#ed232b"} bold>
-              TRƯỜNG ĐẠI HỌC TÔN ĐỨC THẮNG
-            </Heading>
-            <Heading bold color={"#15489f"}>
-              NGÀY HỘI TƯ VẤN TUYỂN SINH ĐẠI HỌC 2024
-            </Heading>
-          </Box>
-          <LogoComponent />
-          <img
-            src={require("../assets/Logo-tron.png")}
-            alt="Logo"
-            className="logo_img"
-          />
+          <div className="header-container">
+            <div className="logo-title">
+              <img
+                src={require("../assets/Logo-tron.png")}
+                alt="Logo"
+                className="logo_img"
+              />
+              <VStack marginLeft={'1rem'}>
+                <Heading color={"#ed232b"} bold>
+                  TRƯỜNG ĐẠI HỌC TÔN ĐỨC THẮNG
+                </Heading>
+                <Heading bold color={"#15489f"}>
+                  NGÀY HỘI TƯ VẤN TUYỂN SINH ĐẠI HỌC 2024
+                </Heading>
+              </VStack>
+            </div>
+            <LogoComponent />
+          </div>
         </header>
-        <Box alignItems={"center"}>
-          <Heading
-            bold
-          // color={'#15489f'}
-          >
-            MINI GAME
-          </Heading>
-          <Box
-            width={"50%"}
-            rounded="lg"
-            overflow="hidden"
-            borderColor="#c4c4c4"
-            borderWidth="1"
-            _dark={{
-              borderColor: "#c4c4c4",
-              backgroundColor: "#dadada",
-            }}
-            _web={{
-              shadow: 3,
-              borderWidth: 0,
-            }}
-            _light={{
-              backgroundColor: "#dadada",
-            }}
-            alignItems={"center"}
-            margin={"1rem"}
-          >
+        <body className="body" >
+          <Box alignItems={"center"}>
+            <Heading
+              bold
+            // color={'#15489f'}
+            >
+              MINI GAME
+            </Heading>
             <Box
-              maxWidth={"70%"}
+              width={"80%"}
               rounded="lg"
               overflow="hidden"
-              textAlign={"center"}
+              borderColor="#c4c4c4"
+              borderWidth="1"
+              _dark={{
+                borderColor: "#c4c4c4",
+                backgroundColor: "#dadada",
+              }}
+              _web={{
+                shadow: 3,
+                borderWidth: 0,
+              }}
+              _light={{
+                backgroundColor: "#dadada",
+              }}
               alignItems={"center"}
               margin={"1rem"}
             >
-              <HStack
-                id="numbers"
+              <Box
+                // maxWidth={"100%"}
+                rounded="lg"
+                overflow="hidden"
+                textAlign={"center"}
+                alignItems={"center"}
                 margin={"1rem"}
-                padding={"1"}
-                justifyContent={"space-around"}
-                width={'25rem'}
-                backgroundColor={'#FBF8F9'}
-                height={'10rem'}
-                borderRadius={15}
-                maxWidth={"100%"}
-                shadow={3}
+                // backgroundColor={'black'}
+                width={"80%"}
               >
-                <Center>
-                  <LotteryItem
-                    index="0"
-                    color="blue"
-                    number={MaTrungThuong[0]}
-                    decrypting={effect}
-                  />
-                </Center>
-                <Center>
-                  <LotteryItem
-                    index="1"
-                    color="red"
-                    number={MaTrungThuong[1]}
-                    decrypting={effect}
-                  />
-                </Center>
-                <Center>
-                  <LotteryItem
-                    index="2"
-                    color="gray"
-                    number={MaTrungThuong[2]}
-                    decrypting={effect}
-                  />
-                </Center>
-                <Center>
-                  <LotteryItem
-                    index="3"
-                    color="green"
-                    number={MaTrungThuong[3]}
-                    decrypting={effect}
-                  />
-                </Center>
-              </HStack>
+                <HStack
+                  id="numbers"
+                  margin={"1rem"}
+                  padding={"1"}
+                  justifyContent={"space-around"}
+                  width={'50rem'}
+                  backgroundColor={'#FBF8F9'}
+                  height={'20rem'}
+                  borderRadius={15}
+                  maxWidth={"100%"}
+                  shadow={3}
+                >
+                  <Center>
+                    <LotteryItem
+                      index="0"
+                      color="blue"
+                      number={MaTrungThuong[0]}
+                      decrypting={effect}
+                    />
+                  </Center>
+                  <Center>
+                    <LotteryItem
+                      index="1"
+                      color="red"
+                      number={MaTrungThuong[1]}
+                      decrypting={effect}
+                    />
+                  </Center>
+                  <Center>
+                    <LotteryItem
+                      index="2"
+                      color="gray"
+                      number={MaTrungThuong[2]}
+                      decrypting={effect}
+                    />
+                  </Center>
+                  <Center>
+                    <LotteryItem
+                      index="3"
+                      color="green"
+                      number={MaTrungThuong[3]}
+                      decrypting={effect}
+                    />
+                  </Center>
+                </HStack>
+              </Box>
+              <button
+                id="btn"
+                className={effect ? "hide" : ""}
+                onClick={handleRandomize}
+              >
+                Nhận số
+              </button>
             </Box>
-            <button
-              id="btn"
-              className={effect ? "hide" : ""}
-              onClick={handleRandomize}
-            >
-              Nhận số
-            </button>
           </Box>
-        </Box>
+        </body>
+
         <footer className="footer">{/* Add footer content here */}</footer>
       </div>
     );
