@@ -10,6 +10,7 @@
     "cors": "^2.8.5",
     "mssql": "^10.0.2",
     "native-base": "^3.4.28",
+    "papaparse": "^5.4.1",
     "react": "^18.2.0",
     "react-alert": "^7.0.3",
     "react-dom": "^18.2.0",

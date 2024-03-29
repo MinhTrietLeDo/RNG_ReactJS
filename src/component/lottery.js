@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import "./../App.css";
 import React, { useState, useEffect, useCallback } from "react";
 import Loading from "./loading";
@@ -15,6 +14,7 @@ import {
   Modal,
 } from "native-base";
 import LotteryItem from "./balls/deezballs";
+import Papa from "papaparse";
 
 function Lottery() {
   const [data, setData] = useState([]);
@@ -22,35 +22,25 @@ function Lottery() {
   const [loading, setLoading] = useState(true);
   const [usedIndices, setUsedIndices] = useState(new Set());
   const [effect, setEffect] = useState(false);
-  // const [showModal, setShowModal] = useState(false)
+  // const [selectedID, setSelectedID] = useState(null);
 
-  useEffect(() => {
-    fetchData().catch(console.error);
-  }, []);
+  useEffect(() => {}, []);
 
-  const fetchData = async () => {
-    try {
-      const response = await fetchWithTimeout(
-        "http://localhost:3001",
-        {},
-        5000
-      );
-      const data = await response.json();
-      if (typeof data !== "undefined") {
-        const updatedData = data.slice(1);
-        const splitData = updatedData.map((item) =>
-          item.MaTrungThuong.split("")
-        );
-        setData(splitData);
-        setLoading(false);
-        console.log(data);
-      } else {
-        alert("Cannot communicate with the server");
-      }
-    } catch (error) {
-      // console.error("Error fetching data:", error);
-      alert("Error fetching data");
-    }
+  const handleFileRead = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      const text = e.target.result;
+      Papa.parse(text, {
+        header: true,
+        complete: (results) => {
+          setData(results.data.map((item) => item.MaSoTrungThuong));
+        },
+      });
+    };
+
+    reader.readAsText(file);
   };
 
   const handleRandomize = useCallback(() => {
@@ -69,7 +59,7 @@ function Lottery() {
       const timeoutId = setTimeout(() => {
         setEffect(false);
         // setShowModal(true)
-      }, 33000);
+      }, 9100);
       return () => {
         clearTimeout(timeoutId);
       };
@@ -78,128 +68,135 @@ function Lottery() {
     }
   }, [data, usedIndices]);
 
-  if (loading) {
-    return (
-      <div
-        id="main-container"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          alignSelf: "center",
-        }}
-      >
-        <div id="loading-container">
-          <Loading height={"20%"} width={"20%"} />
-          <div id="loading-text"></div>
+  // const updateData = async () => {
+  //   try {
+  //     const response = await fetch("http:localhost:3001/updateData", {
+  //       method: "PUT",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         id: idToUpdate,
+  //         newData: { IsActive: 1 },
+  //       }),
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error("Network response was not ok");
+  //     }
+
+  //     const result = await response.json();
+  //     console.log("Update result:", result);
+  //     // Handle the response
+  //   } catch (error) {
+  //     console.error("Error updating data:", error);
+  //     // Handle the error
+  //   }
+  // };
+
+  return (
+    <div className="App">
+      <header className="header">
+        <div className="header-container">
+          <img
+            src={require("../assets/Logo-tron.png")}
+            alt="Logo"
+            className="logo_img"
+          />
         </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className="App">
-        <header className="header">
-          <div className="header-container">
-            <img
-              src={require("../assets/Logo-tron.png")}
-              alt="Logo"
-              className="logo_img"
-            />
-          </div>
-        </header>
-        <body className="body">
-          <Box alignItems={"center"}>
+      </header>
+      <body className="body">
+        <Box alignItems={"center"}>
+          <Box
+            width={"80%"}
+            rounded="lg"
+            overflow="hidden"
+            borderColor="#c4c4c4"
+            borderWidth="1"
+            _dark={{
+              borderColor: "#c4c4c4",
+              backgroundColor: "#dadada",
+            }}
+            _web={{
+              shadow: 3,
+              borderWidth: 0,
+            }}
+            _light={{
+              backgroundColor: "#dadada",
+            }}
+            alignItems={"center"}
+            margin={"1rem"}
+          >
             <Box
-              width={"80%"}
+              // maxWidth={"100%"}
               rounded="lg"
               overflow="hidden"
-              borderColor="#c4c4c4"
-              borderWidth="1"
-              _dark={{
-                borderColor: "#c4c4c4",
-                backgroundColor: "#dadada",
-              }}
-              _web={{
-                shadow: 3,
-                borderWidth: 0,
-              }}
-              _light={{
-                backgroundColor: "#dadada",
-              }}
+              textAlign={"center"}
               alignItems={"center"}
               margin={"1rem"}
+              // backgroundColor={'black'}
+              width={"80%"}
             >
-              <Box
-                // maxWidth={"100%"}
-                rounded="lg"
-                overflow="hidden"
-                textAlign={"center"}
-                alignItems={"center"}
+              <HStack
+                id="numbers"
                 margin={"1rem"}
-                // backgroundColor={'black'}
-                width={"80%"}
+                padding={"1"}
+                justifyContent={"space-around"}
+                width={"55rem"}
+                backgroundColor={"#FBF8F9"}
+                height={"23rem"}
+                borderRadius={15}
+                maxWidth={"100%"}
+                shadow={3}
               >
-                <HStack
-                  id="numbers"
-                  margin={"1rem"}
-                  padding={"1"}
-                  justifyContent={"space-around"}
-                  width={"55rem"}
-                  backgroundColor={"#FBF8F9"}
-                  height={"23rem"}
-                  borderRadius={15}
-                  maxWidth={"100%"}
-                  shadow={3}
-                >
-                  <Center>
-                    <LotteryItem
-                      index="0"
-                      color="blue"
-                      number={MaTrungThuong[0]}
-                      decrypting={effect}
-                    />
-                  </Center>
-                  <Center>
-                    <LotteryItem
-                      index="1"
-                      color="red"
-                      number={MaTrungThuong[1]}
-                      decrypting={effect}
-                    />
-                  </Center>
-                  <Center>
-                    <LotteryItem
-                      index="2"
-                      color="gray"
-                      number={MaTrungThuong[2]}
-                      decrypting={effect}
-                    />
-                  </Center>
-                  <Center>
-                    <LotteryItem
-                      index="3"
-                      color="green"
-                      number={MaTrungThuong[3]}
-                      decrypting={effect}
-                    />
-                  </Center>
-                </HStack>
-              </Box>
-              <button
-                id="btn"
-                className={effect ? "hide" : ""}
-                onClick={handleRandomize}
-              >
-                Quay số
-              </button>
+                <Center>
+                  <LotteryItem
+                    index="0"
+                    color="red"
+                    number={MaTrungThuong[0]}
+                    decrypting={effect}
+                  />
+                </Center>
+                <Center>
+                  <LotteryItem
+                    index="1"
+                    color="blue"
+                    number={MaTrungThuong[1]}
+                    decrypting={effect}
+                  />
+                </Center>
+                <Center>
+                  <LotteryItem
+                    index="2"
+                    color="red"
+                    number={MaTrungThuong[2]}
+                    decrypting={effect}
+                  />
+                </Center>
+                <Center>
+                  <LotteryItem
+                    index="3"
+                    color="blue"
+                    number={MaTrungThuong[3]}
+                    decrypting={effect}
+                  />
+                </Center>
+              </HStack>
             </Box>
+            <button
+              id="btn"
+              className={effect ? "hide" : ""}
+              onClick={handleRandomize}
+            >
+              Quay số
+            </button>
           </Box>
-        </body>
-
-        <footer className="footer">{/* Add footer content here */}</footer>
-      </div>
-    );
-  }
+        </Box>
+      </body>
+      <input type="file" accept=".txt" onChange={handleFileRead} />
+      <footer className="footer">{/* Add footer content here */}</footer>
+    </div>
+  );
 }
 
 export default Lottery;

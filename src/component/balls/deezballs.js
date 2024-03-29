@@ -20,7 +20,7 @@ const LotteryItem = ({ number, decrypting, index, color }) => {
         setCurrentNumber(number);
         setDecryptingDone("done");
         clearInterval(timer);
-      }, 8000 + 8000 * index);
+      }, 2000 + 2000 * index);
 
       return () => {
         clearTimeout(timeout);
