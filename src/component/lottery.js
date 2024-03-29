@@ -22,7 +22,7 @@ function Lottery() {
       reader.onload = (e) => {
         const content = e.target.result;
         // Assuming the first line is the header and actual data starts from the second line
-        const lines = content.split('\n').slice(1);
+        const lines = content.split('\n').slice(0);
         setData(lines);
         console.log('TEST: ', lines)
         setIsActive(false)
@@ -182,7 +182,7 @@ function Lottery() {
           </Box>
         </Box>
       </body>
-      {isActive ? (<input type="file" accept=".txt" onChange={handleFileRead} />):null}
+      {isActive ? (<input type="file" accept=".txt" onChange={handleFileRead} />) : null}
       <footer className="footer">{/* Add footer content here */}</footer>
     </div>
   );
