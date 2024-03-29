@@ -1,47 +1,34 @@
 import "./../App.css";
 import React, { useState, useEffect, useCallback } from "react";
-import Loading from "./loading";
-import fetchWithTimeout from "../config/config";
-import LogoComponent from "../assets/logo";
 import {
-  Heading,
-  Button,
   Box,
-  Text,
-  VStack,
   HStack,
   Center,
-  Modal,
 } from "native-base";
 import LotteryItem from "./balls/deezballs";
-import Papa from "papaparse";
 
 function Lottery() {
   const [data, setData] = useState([]);
   const [MaTrungThuong, setMaTrungThuong] = useState([0, 0, 0, 0]);
-  const [loading, setLoading] = useState(true);
   const [usedIndices, setUsedIndices] = useState(new Set());
   const [effect, setEffect] = useState(false);
-  // const [selectedID, setSelectedID] = useState(null);
-
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   const handleFileRead = (event) => {
     const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = function (e) {
-      const text = e.target.result;
-      Papa.parse(text, {
-        header: true,
-        complete: (results) => {
-          setData(results.data.map((item) => item.MaSoTrungThuong));
-        },
-      });
-    };
-
-    reader.readAsText(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const content = e.target.result;
+        // Assuming the first line is the header and actual data starts from the second line
+        const lines = content.split('\n').slice(1);
+        setData(lines);
+        console.log('TEST: ', lines)
+      };
+      reader.readAsText(file);
+    }
   };
+
 
   const handleRandomize = useCallback(() => {
     const availableData = data.filter((_, index) => !usedIndices.has(index));
