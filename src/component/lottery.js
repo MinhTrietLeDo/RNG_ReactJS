@@ -3,7 +3,21 @@ import "./../App.css";
 import React, { useState, useEffect, useCallback } from "react";
 import Loading from "./loading";
 import fetchWithTimeout from "../config/config";
+<<<<<<< HEAD
 import { Heading, Button, Box, Text, VStack, HStack, Center, Modal } from "native-base";
+=======
+import LogoComponent from "../assets/logo";
+import {
+  Heading,
+  Button,
+  Box,
+  Text,
+  VStack,
+  HStack,
+  Center,
+  Modal,
+} from "native-base";
+>>>>>>> 1c6b30ff440348b075b2f4c1f82ba23473ef940b
 import LotteryItem from "./balls/deezballs";
 
 function Lottery() {
@@ -12,7 +26,7 @@ function Lottery() {
   const [loading, setLoading] = useState(true);
   const [usedIndices, setUsedIndices] = useState(new Set());
   const [effect, setEffect] = useState(false);
-  const [showModal, setShowModal] = useState(false)
+  // const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     fetchData().catch(console.error);
@@ -28,9 +42,12 @@ function Lottery() {
       const data = await response.json();
       if (typeof data !== "undefined") {
         const updatedData = data.slice(1);
-        const splitData = updatedData.map((item) => item.MaTrungThuong.split(""));
+        const splitData = updatedData.map((item) =>
+          item.MaTrungThuong.split("")
+        );
         setData(splitData);
         setLoading(false);
+        console.log(data);
       } else {
         alert("Cannot communicate with the server");
       }
@@ -55,8 +72,8 @@ function Lottery() {
       setEffect(true);
       const timeoutId = setTimeout(() => {
         setEffect(false);
-        setShowModal(true)
-      }, 5000);
+        // setShowModal(true)
+      }, 33000);
       return () => {
         clearTimeout(timeoutId);
       };
@@ -87,25 +104,14 @@ function Lottery() {
       <div className="App">
         <header className="header">
           <div className="header-container">
-            <div className="logo-title">
-              <img
-                src={require("../assets/Logo-tron.png")}
-                alt="Logo"
-                className="logo_img"
-              />
-              <VStack marginLeft={'1rem'}>
-                <Heading color={"#ed232b"} bold fontSize={'3rem'}>
-                  TRƯỜNG ĐẠI HỌC TÔN ĐỨC THẮNG
-                </Heading>
-                <Heading bold color={"#15489f"} fontSize={'3rem'}>
-                  NGÀY HỘI TƯ VẤN TUYỂN SINH ĐẠI HỌC 2024
-                </Heading>
-              </VStack>
-            </div>
-            {/* <LogoComponent /> */}
+            <img
+              src={require("../assets/Logo-tron.png")}
+              alt="Logo"
+              className="logo_img"
+            />
           </div>
         </header>
-        <body className="body" >
+        <body className="body">
           <Box alignItems={"center"}>
             <Box
               width={"80%"}
@@ -142,9 +148,9 @@ function Lottery() {
                   margin={"1rem"}
                   padding={"1"}
                   justifyContent={"space-around"}
-                  width={'55rem'}
-                  backgroundColor={'#FBF8F9'}
-                  height={'23rem'}
+                  width={"55rem"}
+                  backgroundColor={"#FBF8F9"}
+                  height={"23rem"}
                   borderRadius={15}
                   maxWidth={"100%"}
                   shadow={3}
@@ -182,29 +188,13 @@ function Lottery() {
                     />
                   </Center>
                 </HStack>
-                <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-                  <Modal.Content maxWidth="900px">
-                    <Modal.CloseButton />
-                    <Modal.Header _text={{ fontSize: '5rem' }}>Chúc Mừng Thí Sinh</Modal.Header>
-                    <Modal.Body textAlign={'center'}>
-                      <Text bold fontSize={'15rem'}>{MaTrungThuong}</Text>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="ghost" colorScheme="blueGray" onPress={() => {
-                        setShowModal(false);
-                      }}>
-                        Tiếp tục
-                      </Button>
-                    </Modal.Footer>
-                  </Modal.Content>
-                </Modal>
               </Box>
               <button
                 id="btn"
                 className={effect ? "hide" : ""}
                 onClick={handleRandomize}
               >
-                Nhận số
+                Quay số
               </button>
             </Box>
           </Box>
