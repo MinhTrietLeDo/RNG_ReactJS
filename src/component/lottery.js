@@ -12,6 +12,7 @@ function Lottery() {
   const [MaTrungThuong, setMaTrungThuong] = useState([0, 0, 0, 0]);
   const [usedIndices, setUsedIndices] = useState(new Set());
   const [effect, setEffect] = useState(false);
+  const [isActive, setIsActive] = useState(true)
   useEffect(() => { }, []);
 
   const handleFileRead = (event) => {
@@ -24,6 +25,7 @@ function Lottery() {
         const lines = content.split('\n').slice(1);
         setData(lines);
         console.log('TEST: ', lines)
+        setIsActive(false)
       };
       reader.readAsText(file);
     }
@@ -180,7 +182,7 @@ function Lottery() {
           </Box>
         </Box>
       </body>
-      <input type="file" accept=".txt" onChange={handleFileRead} />
+      {isActive ? (<input type="file" accept=".txt" onChange={handleFileRead} />):null}
       <footer className="footer">{/* Add footer content here */}</footer>
     </div>
   );
