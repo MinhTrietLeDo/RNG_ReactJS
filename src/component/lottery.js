@@ -3,9 +3,6 @@ import "./../App.css";
 import React, { useState, useEffect, useCallback } from "react";
 import Loading from "./loading";
 import fetchWithTimeout from "../config/config";
-<<<<<<< HEAD
-import { Heading, Button, Box, Text, VStack, HStack, Center, Modal } from "native-base";
-=======
 import LogoComponent from "../assets/logo";
 import {
   Heading,
@@ -17,7 +14,6 @@ import {
   Center,
   Modal,
 } from "native-base";
->>>>>>> 1c6b30ff440348b075b2f4c1f82ba23473ef940b
 import LotteryItem from "./balls/deezballs";
 
 function Lottery() {
